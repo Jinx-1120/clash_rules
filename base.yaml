@@ -17,37 +17,31 @@ log-level: info
 # clash 的 RESTful API
 external-controller: 127.0.0.1:9090
 
+
 # DNS 设置
 dns:
-  enable: true
-  ipv6: false
-  default-nameserver: [223.5.5.5, 119.29.29.29]
-  fake-ip-range: 198.18.0.1/16
-  fake-ip-filter:
-    [
-      "+.lan",
-      "*",
-      "+.local",
-      "+.cmpassport.com",
-      "id6.me",
-      "open.e.189.cn",
-      "mdn.open.wo.cn",
-      "opencloud.wostore.cn",
-      "auth.wosms.cn",
-      "+.10099.com.cn",
-    ]
-  use-hosts: true
+  # 以下填写的 DNS 服务器将用于解析 DNS 服务的域名
+  # 仅填写 DNS 服务器的 IP 地址
+  default-nameserver:
+    - 223.5.5.5
+    - 114.114.114.114
+  # 支持 UDP / TCP / DoT / DoH / DoQ 协议的 DNS 服务，可以指明具体的连接端口号。
+  # 所有 DNS 请求将直接发送到服务器，不经过任何代理。
+  # Stash 会使用最先获得的解析记录回复 DNS 请求
   nameserver:
-    [
-      223.5.5.5,
-      119.29.29.29,
-      "https://doh.pub/dns-query",
-      "https://dns.alidns.com/dns-query",
-    ]
-  #nameserver: ['system']
-  fallback: [8.8.8.8, 1.1.1.1]
-  fallback-filter: { geoip: true, geoip-code: CN, ipcidr: [240.0.0.0/4] }
-  nameserver-policy: { "+.baidu.com": "system" }
+    # 不建议配置超过 2 个 DNS 服务器，会增加系统功耗
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+    - system # 使用 iOS 系统 DNS
+    # - quic://dns.adguard.com:853
+    # - doq://test.dns.nextdns.io:853
+ 
+  # 跳过证书验证，解决部分兼容性问题 https://help.nextdns.io/t/g9hdkjz
+  skip-cert-verify: true
+ 
+  # DNS 查询跟随代理规则
+  follow-rule: false
+
 
 # Stash
 url-rewrite:
