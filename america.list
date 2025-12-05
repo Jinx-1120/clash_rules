@@ -1,5 +1,6 @@
 DOMAIN-SUFFIX,gateway.ai.cloudflare.com
-DOMAIN-SUFFIX,google.dev
+DOMAIN-SUFFIX,google.com
+DOMAIN-SUFFIX,googleusercontent.com
 DOMAIN-SUFFIX,gemini.google.com
 DOMAIN,antigravity.google
 DOMAIN-SUFFIX,firebaseio.com
