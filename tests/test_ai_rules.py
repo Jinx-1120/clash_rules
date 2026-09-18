@@ -60,14 +60,14 @@ class AIRules(unittest.TestCase):
             with self.subTest(host=host):self.assertTrue(domain_matches(host, rules('ai.list')))
 
     def test_shared_identity_is_explicit(self):
-        for host in ('challenges.cloudflare.com','accounts.google.com','oauth2.googleapis.com',
-                     'github.com','api.github.com','github.githubassets.com','avatars.githubusercontent.com'):
+        for host in ('challenges.cloudflare.com','accounts.google.com','oauth2.googleapis.com'):
             self.assertTrue(domain_matches(host, rules('ai-shared.list')), host)
             self.assertFalse(domain_matches(host, rules('ai.list')), host)
 
     def test_no_generic_cloud_social_or_developer_capture(self):
         entries = rules('ai.list') + rules('ai-shared.list')
         for host in ('google.com','mail.google.com','maps.googleapis.com','storage.googleapis.com',
+                     'github.com','api.github.com','github.githubassets.com','avatars.githubusercontent.com',
                      'raw.githubusercontent.com','registry.npmjs.org','example.sentry.io',
                      'example.auth0.com','x.com','twitter.com','cloudflare.com','cdn.jsdelivr.net',
                      'notopenai.com','openai.com.evil.example','claude.ai.evil.example','127.0.0.1'):

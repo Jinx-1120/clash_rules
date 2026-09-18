@@ -2,6 +2,18 @@
 
 个人维护的分流规则。`proxy.list` / `no_proxy.list` 保持原用途；AI 规则独立维护，不包含节点、账号、订阅令牌或私有 API 地址。
 
+## 内网规则
+
+[LocalAreaNetwork.list](LocalAreaNetwork.list) 同步自 [ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/blob/master/Clash/LocalAreaNetwork.list)，保留来源注释和 `no-resolve` 语义。包含内网/保留地址、局域网后缀和路由器管理域名；`tplogin.cn`、`zte.home`、`www.asusrouter.com` 上游已包含，各保留一次；前两者为后缀规则，后者为精确域名规则。
+
+Surge 使用以下规则；Mihomo 使用同一 URL，配置为 `behavior: classical`、`format: text`，策略为 `DIRECT`。应放在 AI 应用进程规则及通用代理规则之前，让路由器域名优先直连。IP 项的 `no-resolve` 不会主动解析未知域名；额外的私有域名应在自己的私有配置中维护，不上传到公共清单。
+
+```ini
+RULE-SET,https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/LocalAreaNetwork.list,DIRECT,update-interval=86400
+```
+
+这是独立维护的副本，不会自动追踪上游。后续同步先审阅上游变化、保留本地条目、去重并运行测试，再发布。
+
 ## AI 规则
 
 | 文件 | 用途 / 格式 |
@@ -42,7 +54,7 @@ Mihomo 可用 `behavior: classical`、`format: text` 引用 `ai.list` 和 `ai-sh
 
 ## 影响范围与无法自动区分的情况
 
-- `ai-shared.list` 的 `github.com`/`api.github.com` 会同时影响普通 GitHub 请求；`accounts.google.com` 会影响其他 Google 登录；`challenges.cloudflare.com` 会影响其他网站的挑战。TLS 不解密时，不能按网页来源或 `/login` 路径可靠区分共享主机。文件可整体停用或自行维护更小的副本，但相关登录可能变为其他出口。
+- `ai-shared.list` 的 `accounts.google.com` 会影响其他 Google 登录；`challenges.cloudflare.com` 会影响其他网站的挑战。GitHub 通用登录和 API 域名已按既有远程修改移出 AI 共享列表，Copilot 专属端点仍在 `ai.list`。TLS 不解密时，不能按网页来源或 `/login` 路径可靠区分共享主机。文件可整体停用或自行维护更小的副本，但相关登录可能变为其他出口。
 - 不加入全量 `google.com`、`googleapis.com`、`githubusercontent.com`、`cloudflare.com`、`sentry.io`，也不依赖整个云厂商 ASN 或宽泛 `openai` 关键词。普通代码下载、包管理、共享 CDN 和遥测可继续使用普通规则。
 - 独立 Grok 网站/API 走 AI。**X/Twitter 内嵌 Grok** 的 `x.com` 请求仍属于现有 Twitter 分流；若必须同一出口，应让 Twitter 与 AI 选择同一出口或使用隔离的专用浏览器。不能在不影响 Twitter 的同时，用域名规则区分其加密页面路径。
 - Copilot 的专属服务域名和独立 `copilot` CLI 已覆盖。VS Code/JetBrains 的共享扩展宿主、npm 版运行时可能叫 `node`/`Electron`/`java`，没有把这些通用进程整体划入 AI。核心 Copilot 域名仍可命中；第三方插件和自定义 Enterprise 主机按实际目标补充。
