@@ -11,12 +11,6 @@ DOMAIN,oauth2.googleapis.com
 DOMAIN,oauth2.mtls.googleapis.com
 DOMAIN,www.googleapis.com
 
-# GitHub OAuth and Copilot token APIs; entire hostname is routed, not only /login or /copilot
-DOMAIN,github.com
-DOMAIN,api.github.com
-DOMAIN,github.githubassets.com
-DOMAIN,avatars.githubusercontent.com
-DOMAIN,collector.github.com
 
 # Known shared feature/configuration endpoints (not every tenant of these providers)
 DOMAIN,api.statsig.com
