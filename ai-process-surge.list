@@ -1,0 +1,35 @@
+# Surge Mac 6+ PROCESS-NAME rules; do NOT load this file as a Mihomo rule provider.
+# App-prefix mode covers Helper/service executables despite framework version changes.
+# External children (system curl/node/Python/Chrome) do not inherit parent identity.
+# Keep loopback/LAN and VPN endpoint DIRECT rules BEFORE this file.
+
+# ChatGPT
+PROCESS-NAME,/Applications/ChatGPT.app/
+PROCESS-NAME,/Users/*/Applications/ChatGPT.app/*
+# Codex
+PROCESS-NAME,/Applications/Codex.app/
+PROCESS-NAME,/Users/*/Applications/Codex.app/*
+# Claude
+PROCESS-NAME,/Applications/Claude.app/
+PROCESS-NAME,/Users/*/Applications/Claude.app/*
+# Cursor
+PROCESS-NAME,/Applications/Cursor.app/
+PROCESS-NAME,/Users/*/Applications/Cursor.app/*
+# Antigravity
+PROCESS-NAME,/Applications/Antigravity.app/
+PROCESS-NAME,/Users/*/Applications/Antigravity.app/*
+# Grok
+PROCESS-NAME,/Applications/Grok.app/
+PROCESS-NAME,/Users/*/Applications/Grok.app/*
+
+# Dedicated CLI executables; matching is case-sensitive.
+PROCESS-NAME,codex
+PROCESS-NAME,claude
+PROCESS-NAME,cursor-agent
+PROCESS-NAME,copilot
+PROCESS-NAME,agy
+
+# Native Claude installs execute the version file, not necessarily the claude symlink.
+PROCESS-NAME,/Users/*/.local/share/claude/versions/*
+# Cursor CLI dedicated install tree; do not match generic agent or node by basename.
+PROCESS-NAME,/Users/*/.local/share/cursor-agent/*
