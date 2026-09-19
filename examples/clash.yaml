@@ -1,0 +1,63 @@
+# Replace this example node with your own before use.
+# OpenClash / Mihomo and Stash share these rule-provider settings.
+mode: rule
+proxies:
+  - name: Example
+    type: trojan
+    server: proxy.example.com
+    port: 443
+    password: replace-with-your-password
+    sni: proxy.example.com
+    skip-cert-verify: false
+proxy-groups:
+  - name: Proxies
+    type: select
+    proxies: [Example]
+  - name: AI
+    type: select
+    proxies: [Proxies, Example]
+rule-providers:
+  LocalAreaNetwork:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/LocalAreaNetwork.list
+    path: ./rule-providers/LocalAreaNetwork.list
+    interval: 3600
+  no_proxy:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/no_proxy.list
+    path: ./rule-providers/no_proxy.list
+    interval: 3600
+  ai:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/ai.list
+    path: ./rule-providers/ai.list
+    interval: 3600
+  ai-shared:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/ai-shared.list
+    path: ./rule-providers/ai-shared.list
+    interval: 3600
+  proxy:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/proxy.list
+    path: ./rule-providers/proxy.list
+    interval: 3600
+rules:
+  # Keep your actual VPN endpoint DIRECT exceptions here.
+  - DOMAIN,proxy.example.com,DIRECT
+  - RULE-SET,LocalAreaNetwork,DIRECT
+  - RULE-SET,no_proxy,DIRECT
+  - RULE-SET,ai,AI
+  - RULE-SET,ai-shared,AI
+  - RULE-SET,proxy,Proxies
+  - MATCH,Proxies

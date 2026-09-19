@@ -1,6 +1,6 @@
 # AI service destinations. Surge RULE-SET / Mihomo classical text.
 # No policy column, IP ranges, ASN catch-all or generic cloud/CDN suffixes.
-# Sources and shared-host tradeoffs: README.md. Reviewed 2026-09-18.
+# Sources and shared-host tradeoffs: docs/rule-behavior.md. Reviewed 2026-09-18.
 
 # OpenAI / ChatGPT / Codex
 DOMAIN-SUFFIX,openai.com
@@ -54,11 +54,11 @@ DOMAIN,proactivebackend-pa.googleapis.com
 DOMAIN,aisandbox-pa.googleapis.com
 DOMAIN,robinfrontend-pa.googleapis.com
 
-# Grok / xAI (X embedded chat uses the existing Twitter policy; see README)
+# Grok / xAI (X embedded chat uses the existing Twitter policy; see docs/rule-behavior.md)
 DOMAIN-SUFFIX,grok.com
 DOMAIN-SUFFIX,x.ai
 
-# GitHub Copilot (all plan subdomains; browser login is in ai-shared.list)
+# GitHub Copilot (all plan subdomains; generic GitHub login follows other rules)
 DOMAIN-SUFFIX,githubcopilot.com
 DOMAIN-SUFFIX,copilot.microsoft.com
 DOMAIN,copilot-proxy.githubusercontent.com
