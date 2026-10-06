@@ -34,25 +34,17 @@ DOMAIN-SUFFIX,cursor-cdn.com
 DOMAIN-SUFFIX,cursorvm.com
 DOMAIN,anysphere-binaries.s3.us-east-1.amazonaws.com
 
-# Google Antigravity / Gemini (narrow Google API hosts, not all googleapis.com)
+# Google Antigravity / Gemini (narrow Google API hosts, all googleapis.com)
 DOMAIN-SUFFIX,antigravity.google
 DOMAIN-SUFFIX,antigravity.google.com
 DOMAIN-SUFFIX,antigravity-unleash.goog
 DOMAIN-SUFFIX,gemini.google.com
 DOMAIN-SUFFIX,generativeai.google
-DOMAIN,cloudcode-pa.googleapis.com
-DOMAIN,daily-cloudcode-pa.googleapis.com
-DOMAIN,daily-cloudcode-pa.sandbox.googleapis.com
-DOMAIN,cloudaicompanion.googleapis.com
-DOMAIN,generativelanguage.googleapis.com
-DOMAIN,aiplatform.googleapis.com
+DOMAIN-SUFFIX,googleapis.com
 DOMAIN,ai.google.dev
 DOMAIN,aistudio.google.com
 DOMAIN,alkalimakersuite-pa.clients6.google.com
 DOMAIN,makersuite.google.com
-DOMAIN,proactivebackend-pa.googleapis.com
-DOMAIN,aisandbox-pa.googleapis.com
-DOMAIN,robinfrontend-pa.googleapis.com
 
 # Grok / xAI (X embedded chat uses the existing Twitter policy; see docs/rule-behavior.md)
 DOMAIN-SUFFIX,grok.com
