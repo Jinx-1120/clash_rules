@@ -9,6 +9,10 @@ OPTIONAL = {'ai-shared-extra.list', 'china-company-ip.list'}
 
 
 class ClientExamples(unittest.TestCase):
+    def test_surge_keeps_proxy_fallback_when_ip_lookup_fails(self):
+        text = (ROOT / 'examples/surge.conf').read_text()
+        self.assertEqual(text.strip().splitlines()[-1], 'FINAL,Proxies,dns-failed')
+
     def test_all_rule_files_are_referenced_with_refresh(self):
         files = {path.name for path in ROOT.glob('*.list')}
         for example in (ROOT / 'examples').iterdir():

@@ -49,6 +49,8 @@ Surge 使用 `RULE-SET`；Mihomo / OpenClash 与 Stash 使用 `behavior: classic
 
 Surge 示例为域名规则集启用 `extended-matching`，可同时根据 TLS SNI 和 HTTP Host 匹配；这不解密 TLS，也不会替其他客户端启用相同功能。Mihomo 示例中可选清单的 provider 和规则都保持注释，启用时需一起取消注释。
 
+Surge 的 `FINAL,Proxies,dns-failed` 保证启用可选 IP 兜底后，本地 DNS 查询失败仍可交给代理远端解析；这是 [Surge 的 FINAL 参数](https://manual.nssurge.com/rules/final.html)，其他客户端按各自格式处理。
+
 - [Surge 规则集](https://manual.nssurge.com/rules/ruleset.html)、[进程匹配](https://manual.nssurge.com/rules/process.html)、[规则顺序](https://manual.nssurge.com/rules/overview.html)
 - [Mihomo 规则集合](https://wiki.metacubex.one/config/rule-providers/)
 - [Stash 规则集](https://stash.wiki/en/rules/rule-set)
