@@ -1,0 +1,29 @@
+# Mainland AI destinations; imported 2026-10-24.
+# Select the outbound policy in your profile; do not use generic cloud suffixes.
+# International counterparts stay in ai.list; regional endpoints do not guarantee availability.
+DOMAIN-SUFFIX,deepseek.com
+DOMAIN-SUFFIX,doubao.com
+DOMAIN-SUFFIX,kimi.com
+DOMAIN-SUFFIX,moonshot.cn
+DOMAIN-SUFFIX,qianwen.com
+DOMAIN-SUFFIX,tongyi.com
+DOMAIN,tongyi.aliyun.com
+DOMAIN,qianwen.aliyun.com
+DOMAIN,dashscope.aliyuncs.com
+DOMAIN-SUFFIX,cn-beijing.maas.aliyuncs.com
+DOMAIN,ark.cn-beijing.volces.com
+DOMAIN-SUFFIX,bigmodel.cn
+DOMAIN-SUFFIX,chatglm.cn
+DOMAIN-SUFFIX,zhipuai.cn
+DOMAIN-SUFFIX,minimaxi.com
+DOMAIN-SUFFIX,minimax.cn
+DOMAIN,yuanbao.tencent.com
+DOMAIN,hunyuan.tencent.com
+DOMAIN,api.hunyuan.cloud.tencent.com
+DOMAIN,hunyuan.tencentcloudapi.com
+DOMAIN,yiyan.baidu.com
+DOMAIN,ernie.baidu.com
+DOMAIN,qianfan.baidubce.com
+DOMAIN-SUFFIX,siliconflow.cn
+# JetBrains official China-region AI endpoint.
+DOMAIN,api.ai.jetbrains.com.cn

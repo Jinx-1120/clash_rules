@@ -16,6 +16,9 @@ proxy-groups:
   - name: AI
     type: select
     proxies: [Proxies, Example]
+  - name: MainlandAI
+    type: select
+    proxies: [DIRECT, Proxies]
 rule-providers:
   LocalAreaNetwork:
     type: http
@@ -31,6 +34,13 @@ rule-providers:
     url: https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/no_proxy.list
     path: ./rule-providers/no_proxy.list
     interval: 3600
+  ai-mainland:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/ai-mainland.list
+    path: ./rule-providers/ai-mainland.list
+    interval: 3600
   ai:
     type: http
     behavior: classical
@@ -45,6 +55,28 @@ rule-providers:
     url: https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/ai-shared.list
     path: ./rule-providers/ai-shared.list
     interval: 3600
+  ai-voice:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/ai-voice.list
+    path: ./rule-providers/ai-voice.list
+    interval: 3600
+  # Optional providers: uncomment together with their matching rules below.
+#   ai-shared-extra:
+#     type: http
+#     behavior: classical
+#     format: text
+#     url: https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/ai-shared-extra.list
+#     path: ./rule-providers/ai-shared-extra.list
+#     interval: 3600
+#   china-company-ip:
+#     type: http
+#     behavior: classical
+#     format: text
+#     url: https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/china-company-ip.list
+#     path: ./rule-providers/china-company-ip.list
+#     interval: 3600
   proxy:
     type: http
     behavior: classical
@@ -57,7 +89,11 @@ rules:
   - DOMAIN,proxy.example.com,DIRECT
   - RULE-SET,LocalAreaNetwork,DIRECT
   - RULE-SET,no_proxy,DIRECT
+  - RULE-SET,ai-mainland,MainlandAI
   - RULE-SET,ai,AI
   - RULE-SET,ai-shared,AI
+  # - RULE-SET,ai-shared-extra,AI
+  - RULE-SET,ai-voice,AI
   - RULE-SET,proxy,Proxies
+  # - RULE-SET,china-company-ip,DIRECT
   - MATCH,Proxies

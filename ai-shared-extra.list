@@ -1,0 +1,68 @@
+# Optional extended AI shared dependencies; imported 2026-10-24.
+# Routes ALL traffic to these shared hosts, including other sites and developer tools.
+# Disabled in examples; sources and tradeoffs: docs/rule-behavior.md.
+
+# OpenAI ChatGPT / Codex
+DOMAIN-SUFFIX,ct.sendgrid.net
+DOMAIN,cdn.workos.com
+DOMAIN,forwarder.workos.com
+DOMAIN,frontend-apps-multi-region.workos.com
+DOMAIN,humb.apple.com
+DOMAIN,images.workoscdn.com
+DOMAIN-SUFFIX,intercom.io
+DOMAIN-SUFFIX,intercomcdn.com
+DOMAIN,js.stripe.com
+DOMAIN,o207216.ingest.sentry.io
+DOMAIN,o33249.ingest.sentry.io
+DOMAIN,rum.browser-intake-datadoghq.com
+DOMAIN,setup.workos.com
+DOMAIN,workos.imgix.net
+
+# Cursor / Grok shared sign-in and content
+DOMAIN,accounts.spacex.ai
+
+# GitHub Copilot shared API
+DOMAIN,api.github.com
+
+# Microsoft Copilot and shared sign-in
+DOMAIN,login.live.com
+DOMAIN,login.microsoftonline.com
+
+# JetBrains AI / Junie and shared identity
+DOMAIN,account.jetbrains.com
+DOMAIN,oauth.account.jetbrains.com
+DOMAIN,frameworks.jetbrains.com
+
+# Kiro core and social sign-in
+DOMAIN,cognito-identity.us-east-1.amazonaws.com
+DOMAIN-SUFFIX,awswaf.com
+
+# Google Gemini shared dependencies
+DOMAIN,apis.google.com
+DOMAIN,csp.withgoogle.com
+DOMAIN,encrypted-tbn0.gstatic.com
+DOMAIN,encrypted-tbn1.gstatic.com
+DOMAIN,encrypted-tbn2.gstatic.com
+DOMAIN,encrypted-tbn3.gstatic.com
+DOMAIN,fonts.gstatic.com
+DOMAIN,lh3.google.com
+DOMAIN,lh3.googleusercontent.com
+DOMAIN,lh5.googleusercontent.com
+DOMAIN,maps.gstatic.com
+DOMAIN,ogs.google.com
+DOMAIN,play.google.com
+DOMAIN,ssl.gstatic.com
+DOMAIN,waa-pa.clients6.google.com
+DOMAIN,www.google.com
+DOMAIN,www.gstatic.com
+DOMAIN,ogads-pa.clients6.google.com
+
+# Claude login, Artifact libraries and optional telemetry
+DOMAIN-SUFFIX,hcaptcha.com
+DOMAIN,cdnjs.cloudflare.com
+DOMAIN,cdn.jsdelivr.net
+DOMAIN,cdn.tailwindcss.com
+DOMAIN,code.jquery.com
+DOMAIN,unpkg.com
+DOMAIN,http-intake.logs.us5.datadoghq.com
+DOMAIN,browser-intake-us5-datadoghq.com

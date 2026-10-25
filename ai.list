@@ -1,6 +1,6 @@
 # AI service destinations. Surge RULE-SET / Mihomo classical text.
-# No policy column, IP ranges, ASN catch-all or generic cloud/CDN suffixes.
-# Sources and shared-host tradeoffs: docs/rule-behavior.md. Reviewed 2026-09-18.
+# No policy column, IP ranges or ASN catch-all; googleapis.com is intentionally broad.
+# Sources and shared-host tradeoffs: docs/rule-behavior.md. Updated 2026-10-24.
 
 # OpenAI / ChatGPT / Codex
 DOMAIN-SUFFIX,openai.com
@@ -34,7 +34,7 @@ DOMAIN-SUFFIX,cursor-cdn.com
 DOMAIN-SUFFIX,cursorvm.com
 DOMAIN,anysphere-binaries.s3.us-east-1.amazonaws.com
 
-# Google Antigravity / Gemini (narrow Google API hosts, all googleapis.com)
+# Google Antigravity / Gemini (all googleapis.com APIs, including non-AI services)
 DOMAIN-SUFFIX,antigravity.google
 DOMAIN-SUFFIX,antigravity.google.com
 DOMAIN-SUFFIX,antigravity-unleash.goog
@@ -66,3 +66,125 @@ DOMAIN-SUFFIX,bard.google.com
 DOMAIN-SUFFIX,deepmind.com
 DOMAIN-SUFFIX,deepmind.google
 DOMAIN-SUFFIX,chorus.sh
+
+# Regional international AI endpoints
+DOMAIN-SUFFIX,qwen.ai
+DOMAIN-SUFFIX,minimax.io
+DOMAIN-SUFFIX,moonshot.ai
+DOMAIN-SUFFIX,z.ai
+DOMAIN,dashscope-intl.aliyuncs.com
+DOMAIN,dashscope-us.aliyuncs.com
+DOMAIN-SUFFIX,ap-southeast-1.maas.aliyuncs.com
+DOMAIN-SUFFIX,us-east-1.maas.aliyuncs.com
+DOMAIN-SUFFIX,eu-central-1.maas.aliyuncs.com
+DOMAIN-SUFFIX,ap-northeast-1.maas.aliyuncs.com
+DOMAIN-SUFFIX,cn-hongkong.maas.aliyuncs.com
+DOMAIN,cn-hongkong.dashscope.aliyuncs.com
+
+# OpenAI ChatGPT / Codex
+DOMAIN-SUFFIX,chat.com
+DOMAIN-SUFFIX,oaistatsig.com
+DOMAIN,cdn.openaimerge.com
+
+# Anthropic Claude short links
+DOMAIN-SUFFIX,clau.de
+
+# Cursor / Grok shared sign-in and content
+DOMAIN-SUFFIX,grokusercontent.com
+DOMAIN-SUFFIX,grokipedia.com
+
+# Microsoft Copilot and shared sign-in
+DOMAIN-SUFFIX,copilot.com
+DOMAIN-SUFFIX,copilot.cloud.microsoft
+
+# Meta AI / Muse video search
+DOMAIN-SUFFIX,meta.ai
+DOMAIN-SUFFIX,muse.ai
+
+# JetBrains AI / Junie and shared identity
+DOMAIN-SUFFIX,jetbrains.ai
+DOMAIN,api.app.prod.grazie.aws.intellij.net
+DOMAIN,api.jetbrains.cloud
+DOMAIN,auth.grazie.ai
+DOMAIN,cdn.agentclientprotocol.com
+
+# Kiro core and social sign-in
+DOMAIN-SUFFIX,kiro.dev
+DOMAIN,q.eu-central-1.amazonaws.com
+DOMAIN,q.us-east-1.amazonaws.com
+
+# Windsurf / Devin Desktop
+DOMAIN-SUFFIX,codeium.com
+DOMAIN-SUFFIX,codeiumdata.com
+DOMAIN-SUFFIX,windsurf.com
+DOMAIN-SUFFIX,devin.ai
+
+# Zed AI editor
+DOMAIN-SUFFIX,zed.dev
+
+# Apple Intelligence / Private Cloud Compute
+DOMAIN,apple-relay.apple.com
+DOMAIN,apple-relay.cloudflare.com
+DOMAIN,apple-relay.fastly-edge.com
+DOMAIN,cp4.cloudflare.com
+
+# Google Gemini alias
+DOMAIN-SUFFIX,gemini.google
+
+# Gemini Notebook / NotebookLM
+DOMAIN-SUFFIX,notebook.google
+DOMAIN,notebook.google.com
+DOMAIN-SUFFIX,notebooklm.google
+DOMAIN,notebooklm.google.com
+DOMAIN,notebooklm.cloud.google.com
+DOMAIN,notebook.cloud.google.com
+DOMAIN,notebooklm.cloud.google
+
+# Google Jules
+DOMAIN-SUFFIX,jules.google
+DOMAIN,jules.google.com
+
+# Google Labs AI experiments
+DOMAIN,labs.google
+
+# Google Opal
+DOMAIN-SUFFIX,opal.google
+DOMAIN,opal.google.com
+DOMAIN,opal.withgoogle.com
+
+# Augment Code
+DOMAIN-SUFFIX,augmentcode.com
+
+# Cerebras
+DOMAIN-SUFFIX,cerebras.ai
+
+# Cohere
+DOMAIN-SUFFIX,cohere.ai
+DOMAIN-SUFFIX,cohere.com
+
+# Groq
+DOMAIN-SUFFIX,groq.com
+
+# Jasper / Clipdrop
+DOMAIN-SUFFIX,jasper.ai
+DOMAIN-SUFFIX,clipdrop.co
+
+# Dify Cloud / hosted applications
+DOMAIN-SUFFIX,dify.ai
+DOMAIN-SUFFIX,udify.app
+
+# OpenArt
+DOMAIN-SUFFIX,openart.ai
+
+# OpenRouter
+DOMAIN-SUFFIX,openrouter.ai
+
+# Mistral
+DOMAIN-SUFFIX,mistral.ai
+
+# TRAE International
+DOMAIN-SUFFIX,trae.ai
+DOMAIN-SUFFIX,traeapi.us
+
+# Dia
+DOMAIN-SUFFIX,diabrowser.com

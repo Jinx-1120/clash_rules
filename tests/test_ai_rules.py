@@ -1,7 +1,6 @@
 """Offline routing-contract tests; real Surge matching remains a separate check."""
 from pathlib import Path
 import fnmatch
-import re
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -28,7 +27,7 @@ def process_matches(path, entries):
 class AIRules(unittest.TestCase):
     def test_format_and_duplicates(self):
         combined = []
-        for name in ('ai.list', 'ai-shared.list', 'ai-process-surge.list'):
+        for name in ('ai.list', 'ai-mainland.list', 'ai-shared.list', 'ai-shared-extra.list', 'ai-process-surge.list'):
             entries = rules(name)
             self.assertTrue(entries)
             self.assertEqual(len(entries), len(set(entries)), name)
@@ -55,24 +54,79 @@ class AIRules(unittest.TestCase):
         computer.cluster.cursorvm.com grok.com api.x.ai management-api.x.ai
         api.githubcopilot.com api.individual.githubcopilot.com api.business.githubcopilot.com
         api.enterprise.githubcopilot.com copilot-proxy.githubusercontent.com
-        copilot-telemetry.githubusercontent.com gemini.google.com perplexity.ai'''.split()
+        copilot-telemetry.githubusercontent.com gemini.google.com perplexity.ai
+        chat.com api.oaistatsig.com cdn.openaimerge.com clau.de grokusercontent.com
+        copilot.com copilot.cloud.microsoft meta.ai api.jetbrains.ai api.jetbrains.cloud
+        api.app.prod.grazie.aws.intellij.net cdn.agentclientprotocol.com kiro.dev
+        q.us-east-1.amazonaws.com q.eu-central-1.amazonaws.com windsurf.com codeiumdata.com
+        devin.ai zed.dev apple-relay.apple.com cp4.cloudflare.com notebooklm.cloud.google.com
+        notebook.google jules.google.com opal.withgoogle.com augmentcode.com api.cerebras.ai
+        api.cohere.com api.groq.com jasper.ai clipdrop.co api.dify.ai demo.udify.app
+        openart.ai openrouter.ai api.mistral.ai traeapi.us diabrowser.com muse.ai'''.split()
         for host in hosts:
             with self.subTest(host=host):self.assertTrue(domain_matches(host, rules('ai.list')))
 
     def test_shared_identity_is_explicit(self):
-        for host in ('challenges.cloudflare.com','accounts.google.com','oauth2.googleapis.com'):
+        for host, also_in_core in (('challenges.cloudflare.com', False), ('accounts.google.com', False),
+                                   ('oauth2.googleapis.com', True), ('oauth2.mtls.googleapis.com', True),
+                                   ('www.googleapis.com', True)):
             self.assertTrue(domain_matches(host, rules('ai-shared.list')), host)
-            self.assertFalse(domain_matches(host, rules('ai.list')), host)
+            self.assertEqual(domain_matches(host, rules('ai.list')), also_in_core, host)
+
+    def test_googleapis_scope_is_intentionally_broad(self):
+        entries = rules('ai.list')
+        for host in ('googleapis.com', 'maps.googleapis.com', 'storage.googleapis.com',
+                     'oauth2.googleapis.com', 'oauth2.mtls.googleapis.com'):
+            self.assertTrue(domain_matches(host, entries), host)
+        for host in ('notgoogleapis.com', 'googleapis.com.evil.example'):
+            self.assertFalse(domain_matches(host, entries), host)
+
+    def test_extended_shared_hosts_are_opt_in(self):
+        core = rules('ai.list') + rules('ai-shared.list')
+        extra = rules('ai-shared-extra.list')
+        for host in ('api.github.com', 'www.google.com', 'fonts.gstatic.com', 'cdn.jsdelivr.net',
+                     'accounts.spacex.ai', 'login.microsoftonline.com', 'account.jetbrains.com',
+                     'cognito-identity.us-east-1.amazonaws.com', 'cdn.workos.com', 'js.stripe.com',
+                     'intercom.io', 'js.hcaptcha.com', 'challenge.awswaf.com'):
+            self.assertFalse(domain_matches(host, core), host)
+            self.assertTrue(domain_matches(host, extra), host)
+        for host in ('github.com', 'mail.google.com', 'unrelated.cloudfront.net',
+                     'api.github.com.evil.example', 'unrelated.sentry.io'):
+            self.assertFalse(domain_matches(host, extra), host)
+
+    def test_mainland_and_international_endpoints_are_separate(self):
+        mainland = rules('ai-mainland.list')
+        overseas = rules('ai.list')
+        for host in ('deepseek.com', 'api.deepseek.com', 'doubao.com', 'kimi.com', 'api.moonshot.cn',
+                     'dashscope.aliyuncs.com', 'tenant.cn-beijing.maas.aliyuncs.com',
+                     'ark.cn-beijing.volces.com', 'bigmodel.cn', 'minimaxi.com', 'yuanbao.tencent.com',
+                     'qianfan.baidubce.com', 'siliconflow.cn', 'api.ai.jetbrains.com.cn'):
+            self.assertTrue(domain_matches(host, mainland), host)
+            self.assertFalse(domain_matches(host, overseas), host)
+        for host in ('qwen.ai', 'moonshot.ai', 'minimax.io', 'z.ai', 'dashscope-intl.aliyuncs.com',
+                     'dashscope-us.aliyuncs.com', 'tenant.cn-hongkong.maas.aliyuncs.com',
+                     'tenant.ap-southeast-1.maas.aliyuncs.com'):
+            self.assertTrue(domain_matches(host, overseas), host)
+            self.assertFalse(domain_matches(host, mainland), host)
+        for host in ('deepseek.com.evil.example', 'notdeepseek.com', 'other.aliyuncs.com'):
+            self.assertFalse(domain_matches(host, mainland), host)
 
     def test_no_generic_cloud_social_or_developer_capture(self):
         entries = rules('ai.list') + rules('ai-shared.list')
-        for host in ('google.com','mail.google.com','maps.googleapis.com','storage.googleapis.com',
+        for host in ('google.com','mail.google.com',
                      'github.com','api.github.com','github.githubassets.com','avatars.githubusercontent.com',
                      'raw.githubusercontent.com','registry.npmjs.org','example.sentry.io',
                      'example.auth0.com','x.com','twitter.com','cloudflare.com','cdn.jsdelivr.net',
                      'notopenai.com','openai.com.evil.example','claude.ai.evil.example','127.0.0.1'):
             self.assertFalse(domain_matches(host, entries), host)
         self.assertTrue(all(kind not in ('IP-ASN','IP-CIDR','DOMAIN-KEYWORD') for kind,_ in entries))
+
+    def test_education_direct_exception_has_a_domain_boundary(self):
+        entries = rules('no_proxy.list')
+        for host in ('edu.cn', 'tsinghua.edu.cn', 'www.tsinghua.edu.cn'):
+            self.assertTrue(domain_matches(host, entries), host)
+        for host in ('notedu.cn', 'edu.cn.evil.example', 'example.edu.com'):
+            self.assertFalse(domain_matches(host, entries), host)
 
     def test_helper_cli_and_versioned_paths(self):
         paths = ['/Applications/ChatGPT.app/Contents/Resources/codex',
