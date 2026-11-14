@@ -1,0 +1,10 @@
+# Surge selectors for the Speedtest policy.
+# Domains retain TLS SNI and HTTP Host matching; User-Agent requires HTTP processing.
+DOMAIN-SUFFIX,fast.com,extended-matching
+DOMAIN-SUFFIX,speed.cloudflare.com,extended-matching
+DOMAIN-SUFFIX,ooklaserver.net,extended-matching
+DOMAIN,speed.dler.io,extended-matching
+DOMAIN-SUFFIX,speedtest.co,extended-matching
+DOMAIN-SUFFIX,speedtest.net,extended-matching
+DOMAIN-SUFFIX,speedtestcustom.com,extended-matching
+USER-AGENT,SpeedTest*

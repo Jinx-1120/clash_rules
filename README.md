@@ -10,11 +10,11 @@
 2. 将示例节点替换为自己的节点；如果合入已有配置，保留节点、监听和 DNS 设置，合并策略组及规则部分，不要重复创建同名配置段或 YAML 键。
 3. 在客户端启用规则模式，选择 `Proxies` 的普通代理出口、`AI` 的海外 AI 出口和 `MainlandAI` 的大陆 AI 出口（默认直连）。已有策略组可替换示例中的同名引用。
 
-示例已引用下表规则；扩展共享依赖和云厂商 IP 清单默认注释，按需启用。Surge 的进程规则仅在 Mac 上启用。合并时，将自己的节点入口、本地网络和明确的直连例外放在前面，大陆 AI 放在海外 AI 之前，AI 规则放在普通代理、地区规则及最终兜底之前。
+下表包含配置示例和托管 Surge 配置使用的规则。扩展共享依赖和云厂商 IP 清单默认注释，按需启用。Surge 的进程规则仅在 Mac 上启用。合并时，将自己的节点入口、本地网络和明确的直连例外放在前面，大陆 AI 放在海外 AI 之前，AI 规则放在普通代理、地区规则及最终兜底之前。
 
 ## 包含哪些规则
 
-| 规则 | 用途 | 示例中的出口 |
+| 规则 | 用途 | 策略 |
 | --- | --- | --- |
 | [LocalAreaNetwork.list](LocalAreaNetwork.list) | 本地网络、保留地址和路由器管理域名 | `DIRECT` |
 | [no_proxy.list](no_proxy.list) | 指定直连的网站 | `DIRECT` |
@@ -25,12 +25,21 @@
 | [ai-voice.list](ai-voice.list) | ChatGPT 语音的官方 IP 网段快照 | `AI` |
 | [ai-process-surge.list](ai-process-surge.list) | AI 桌面应用与专用 CLI 的进程匹配，仅支持 Surge Mac 6+ | `AI` |
 | [proxy.list](proxy.list) | 指定使用代理的网站 | `Proxies` |
+| [Speedtest.list](Speedtest.list) | Fast、Cloudflare、Ookla 等测速域名及 Surge HTTP User-Agent | `Speedtest` |
+| [YouTube.list](YouTube.list) | YouTube 服务 | `YouTube` |
+| [Telegram.list](Telegram.list) | Telegram 域名及 IP 网段 | `Telegram` |
+| [Bahamut.list](Bahamut.list) | 巴哈姆特動畫瘋 | `Bahamut` |
+| [Microsoft.list](Microsoft.list) | Microsoft 服务 | `Microsoft` |
+| [Apple.list](Apple.list) | Apple 服务 | `Apple` |
+| [ProxyLite.list](ProxyLite.list) | 补充通用代理规则 | `Proxies` |
 | [DisneyPlus.list](DisneyPlus.list) | Disney+ 域名 | `DisneyPlus` |
 | [Extra_CN.list](Extra_CN.list) | 腾讯及其他国内服务的补充规则 | `DIRECT` |
 | [Extra_CN_2.list](Extra_CN_2.list) | 国内域名和 IP 网段的补充规则 | `DIRECT` |
 | [china-company-ip.list](china-company-ip.list) | 云厂商 IP 兜底，包含海外区域和其他租户 | 默认关闭；可选 `DIRECT` |
 
 `DisneyPlus.list`、`Extra_CN.list`、`Extra_CN_2.list` 由现有托管订阅引用。它们沿用原 `naiixi.com` 清单内容与匹配顺序。`Extra_CN_2.list` 保留了对 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script) 的来源署名，许可见 [GPL-2.0](licenses/blackmatrix7-GPL-2.0.txt)。
+
+ACL4SSR 的六份快照按各自文件中的 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) 许可维护。快照来自原 Surge 规则缓存，保留规则顺序、匹配选项和上游注释，新增来源和许可说明。测速规则保留托管 Surge 原有七条域名规则和一条 HTTP User-Agent 规则。
 
 `ai-shared.list` 会同时影响使用相同 Google 登录或 Cloudflare 验证域名的其他网站；不需要时可以移除这份规则的引用。其他客户端和 Surge iOS 使用域名规则，不加载 Mac 进程规则。更细的适用范围见[规则说明](docs/rule-behavior.md)。
 

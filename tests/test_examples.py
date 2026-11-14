@@ -6,10 +6,29 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/'
 OPTIONAL = {'ai-shared-extra.list', 'china-company-ip.list'}
-MANAGED_SUBSCRIPTION_RULES = {'DisneyPlus.list', 'Extra_CN.list', 'Extra_CN_2.list'}
+MANAGED_SUBSCRIPTION_RULES = {
+    'Apple.list', 'Bahamut.list', 'DisneyPlus.list', 'Extra_CN.list', 'Extra_CN_2.list',
+    'Microsoft.list', 'ProxyLite.list', 'Speedtest.list', 'Telegram.list', 'YouTube.list',
+}
 
 
 class ClientExamples(unittest.TestCase):
+    def test_speedtest_keeps_the_managed_surge_matching_options(self):
+        rules = [
+            line for line in (ROOT / 'Speedtest.list').read_text().splitlines()
+            if line and not line.startswith('#')
+        ]
+        self.assertEqual(rules, [
+            'DOMAIN-SUFFIX,fast.com,extended-matching',
+            'DOMAIN-SUFFIX,speed.cloudflare.com,extended-matching',
+            'DOMAIN-SUFFIX,ooklaserver.net,extended-matching',
+            'DOMAIN,speed.dler.io,extended-matching',
+            'DOMAIN-SUFFIX,speedtest.co,extended-matching',
+            'DOMAIN-SUFFIX,speedtest.net,extended-matching',
+            'DOMAIN-SUFFIX,speedtestcustom.com,extended-matching',
+            'USER-AGENT,SpeedTest*',
+        ])
+
     def test_surge_keeps_proxy_fallback_when_ip_lookup_fails(self):
         text = (ROOT / 'examples/surge.conf').read_text()
         self.assertEqual(text.strip().splitlines()[-1], 'FINAL,Proxies,dns-failed')

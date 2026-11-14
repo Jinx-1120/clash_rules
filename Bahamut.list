@@ -1,0 +1,11 @@
+# Source: ACL4SSR/ACL4SSR contributors
+# https://github.com/ACL4SSR/ACL4SSR/blob/master/Clash/Ruleset/Bahamut.list
+# License: CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/
+# Snapshot of the active Surge rule cache. Attribution comments added; rule rows retained.
+# 内容：Bahamut
+# 数量：6条
+DOMAIN,bahamut.akamaized.net
+DOMAIN,gamer-cds.cdn.hinet.net
+DOMAIN,gamer2-cds.cdn.hinet.net
+DOMAIN-SUFFIX,bahamut.com.tw
+DOMAIN-SUFFIX,gamer.com.tw
