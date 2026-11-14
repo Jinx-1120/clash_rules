@@ -25,7 +25,12 @@
 | [ai-voice.list](ai-voice.list) | ChatGPT 语音的官方 IP 网段快照 | `AI` |
 | [ai-process-surge.list](ai-process-surge.list) | AI 桌面应用与专用 CLI 的进程匹配，仅支持 Surge Mac 6+ | `AI` |
 | [proxy.list](proxy.list) | 指定使用代理的网站 | `Proxies` |
+| [DisneyPlus.list](DisneyPlus.list) | Disney+ 域名 | `DisneyPlus` |
+| [Extra_CN.list](Extra_CN.list) | 腾讯及其他国内服务的补充规则 | `DIRECT` |
+| [Extra_CN_2.list](Extra_CN_2.list) | 国内域名和 IP 网段的补充规则 | `DIRECT` |
 | [china-company-ip.list](china-company-ip.list) | 云厂商 IP 兜底，包含海外区域和其他租户 | 默认关闭；可选 `DIRECT` |
+
+`DisneyPlus.list`、`Extra_CN.list`、`Extra_CN_2.list` 由现有托管订阅引用。它们沿用原 `naiixi.com` 清单内容与匹配顺序。`Extra_CN_2.list` 保留了对 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script) 的来源署名，许可见 [GPL-2.0](licenses/blackmatrix7-GPL-2.0.txt)。
 
 `ai-shared.list` 会同时影响使用相同 Google 登录或 Cloudflare 验证域名的其他网站；不需要时可以移除这份规则的引用。其他客户端和 Surge iOS 使用域名规则，不加载 Mac 进程规则。更细的适用范围见[规则说明](docs/rule-behavior.md)。
 

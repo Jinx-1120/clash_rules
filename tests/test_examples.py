@@ -1,4 +1,4 @@
-"""Keep every published rule set reachable from the client examples."""
+"""Keep the shared baseline rule sets reachable from the client examples."""
 from pathlib import Path
 import re
 import unittest
@@ -6,6 +6,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/'
 OPTIONAL = {'ai-shared-extra.list', 'china-company-ip.list'}
+MANAGED_SUBSCRIPTION_RULES = {'DisneyPlus.list', 'Extra_CN.list', 'Extra_CN_2.list'}
 
 
 class ClientExamples(unittest.TestCase):
@@ -14,7 +15,7 @@ class ClientExamples(unittest.TestCase):
         self.assertEqual(text.strip().splitlines()[-1], 'FINAL,Proxies,dns-failed')
 
     def test_all_rule_files_are_referenced_with_refresh(self):
-        files = {path.name for path in ROOT.glob('*.list')}
+        files = {path.name for path in ROOT.glob('*.list')} - MANAGED_SUBSCRIPTION_RULES
         for example in (ROOT / 'examples').iterdir():
             with self.subTest(example=example.name):
                 text = example.read_text()
