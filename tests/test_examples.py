@@ -7,8 +7,13 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/'
 OPTIONAL = {'ai-shared-extra.list', 'china-company-ip.list'}
 MANAGED_SUBSCRIPTION_RULES = {
-    'Apple.list', 'Bahamut.list', 'DisneyPlus.list', 'Extra_CN.list', 'Extra_CN_2.list',
-    'Microsoft.list', 'ProxyLite.list', 'Speedtest.list', 'Telegram.list', 'YouTube.list',
+    'Apple.list', 'ApplePush.list', 'Bahamut.list', 'Bilibili.list', 'DisneyPlus.list',
+    'Epic.list', 'Extra_CN.list', 'Extra_CN_2.list', 'Extra_CN_3.list', 'Extra_Crypto.list',
+    'Extra_Proxies.list', 'Facebook.list', 'GameDownload.list', 'GlobalScholar.list',
+    'Google.list', 'HBOHK.list', 'HBOUSA.list', 'HBO_Max.list', 'Microsoft.list',
+    'Netflix.list', 'PayPal-Clash.list', 'PayPal.list', 'PlayStation.list', 'ProxyLite.list',
+    'Speedtest.list', 'Steam.list', 'Telegram.list', 'TikTok.list', 'Twitter.list',
+    'WeChat.list', 'Xbox.list', 'YouTube.list', 'myTVSUPER.list', 'proxy-explicit.list',
 }
 
 
