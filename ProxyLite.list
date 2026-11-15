@@ -1,7 +1,7 @@
 # Source: ACL4SSR/ACL4SSR contributors
 # https://github.com/ACL4SSR/ACL4SSR/blob/master/Clash/ProxyLite.list
 # License: CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/
-# Snapshot of the active Surge rule cache. Attribution comments added; rule rows retained.
+# Snapshot of the active Surge rule cache. Attribution comments added; duplicate rows removed.
 # 代理列表
 
 # MyList && Other
@@ -209,10 +209,8 @@ DOMAIN-SUFFIX,gitlab.com
 DOMAIN-SUFFIX,gitlab.io
 DOMAIN-SUFFIX,jitpack.io
 DOMAIN-SUFFIX,maven.org
-DOMAIN-SUFFIX,medium.com
 DOMAIN-SUFFIX,mvnrepository.com
 DOMAIN-SUFFIX,quay.io
-DOMAIN-SUFFIX,reddit.com
 DOMAIN-SUFFIX,redhat.com
 DOMAIN-SUFFIX,sonatype.org
 DOMAIN-SUFFIX,sourcegraph.com
@@ -225,8 +223,6 @@ DOMAIN,d1q6f0aelx0por.cloudfront.net
 DOMAIN,d2wy8f7a9ursnm.cloudfront.net
 DOMAIN,d36jcksde1wxzq.cloudfront.net
 DOMAIN-SUFFIX,compose-spec.io
-DOMAIN-SUFFIX,docker.com
-DOMAIN-SUFFIX,docker.io
 DOMAIN-SUFFIX,dockerhub.com
 
 # Discord
@@ -354,7 +350,6 @@ DOMAIN-SUFFIX,challenges.cloudflare.com
 DOMAIN-KEYWORD,1drv
 DOMAIN-KEYWORD,onedrive
 DOMAIN-KEYWORD,skydrive
-DOMAIN-SUFFIX,livefilestore.com
 DOMAIN-SUFFIX,oneclient.sfx.ms
 DOMAIN-SUFFIX,onedrive.com
 DOMAIN-SUFFIX,onedrive.live.com
@@ -367,7 +362,6 @@ DOMAIN-SUFFIX,storage.msn.com
 DOMAIN-SUFFIX,microsoftpersonalcontent.com
 
 # Porn
-DOMAIN-KEYWORD,porn
 DOMAIN-SUFFIX,8teenxxx.com
 DOMAIN-SUFFIX,ahcdn.com
 DOMAIN-SUFFIX,bcvcdn.com
@@ -398,7 +392,6 @@ DOMAIN-SUFFIX,fanbox.cc
 
 # Spark
 DOMAIN-SUFFIX,amplitude.com
-DOMAIN-SUFFIX,firebaseio.com
 DOMAIN-SUFFIX,hockeyapp.net
 DOMAIN-SUFFIX,readdle.com
 DOMAIN-SUFFIX,smartmailcloud.com
@@ -430,7 +423,6 @@ DOMAIN-SUFFIX,taptap.tw
 # Twitch
 DOMAIN-SUFFIX,twitch.tv
 DOMAIN-SUFFIX,ttvnw.net
-DOMAIN-SUFFIX,jtvnw.net
 DOMAIN-KEYWORD,ttvnw
 
 # Twitter
@@ -459,7 +451,6 @@ DOMAIN-SUFFIX,terabox.com
 DOMAIN-SUFFIX,teraboxcdn.com
 
 # Whatsapp
-IP-CIDR,18.194.0.0/15,no-resolve
 IP-CIDR,34.224.0.0/12,no-resolve
 IP-CIDR,54.242.0.0/15,no-resolve
 IP-CIDR,50.22.198.204/30,no-resolve
