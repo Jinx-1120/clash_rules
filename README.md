@@ -37,6 +37,8 @@
 | [Extra_CN_2.list](Extra_CN_2.list) | 国内域名和 IP 网段的补充规则 | `DIRECT` |
 | [china-company-ip.list](china-company-ip.list) | 云厂商 IP 兜底，包含海外区域和其他租户 | 默认关闭；可选 `DIRECT` |
 
+示例在全部自有规则之后引用两份上游兜底清单，接住自有清单没有覆盖的域名：Surge、Surfboard 使用 [Loyalsoldier/surge-rules](https://github.com/Loyalsoldier/surge-rules)，Mihomo、Stash 使用 [Loyalsoldier/clash-rules](https://github.com/Loyalsoldier/clash-rules)，`proxy.txt` 走 `Proxies`，`direct.txt` 走 `DIRECT`。两份清单由上游每天自动构建，本仓库不镜像，刷新间隔为 86400 秒。`proxy.txt` 必须排在 `direct.txt` 之前；不需要国内直连兜底时，同时移除这两条引用。详见[上游兜底清单](docs/rule-behavior.md#上游兜底清单)。
+
 `DisneyPlus.list`、`Extra_CN.list`、`Extra_CN_2.list` 由现有托管订阅引用。它们沿用原 `naiixi.com` 清单内容与匹配顺序。`Extra_CN_2.list` 保留了对 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script) 的来源署名，许可见 [GPL-2.0](licenses/blackmatrix7-GPL-2.0.txt)。
 
 ACL4SSR 的六份快照按各自文件中的 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) 许可维护。快照来自原 Surge 规则缓存，保留规则顺序、匹配选项和上游注释，新增来源和许可说明。测速规则保留托管 Surge 原有七条域名规则和一条 HTTP User-Agent 规则。

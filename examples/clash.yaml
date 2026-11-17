@@ -84,6 +84,20 @@ rule-providers:
     url: https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/proxy.list
     path: ./rule-providers/proxy.list
     interval: 3600
+  upstream-proxy:
+    type: http
+    behavior: domain
+    format: yaml
+    interval: 86400
+    path: ./rule-providers/upstream-proxy.yaml
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/proxy.txt
+  upstream-direct:
+    type: http
+    behavior: domain
+    format: yaml
+    interval: 86400
+    path: ./rule-providers/upstream-direct.yaml
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/direct.txt
 rules:
   # Keep your actual VPN endpoint DIRECT exceptions here.
   - DOMAIN,proxy.example.com,DIRECT
@@ -95,5 +109,8 @@ rules:
   # - RULE-SET,ai-shared-extra,AI
   - RULE-SET,ai-voice,AI
   - RULE-SET,proxy,Proxies
+  # Upstream fallback for names no owned list claims; proxy.txt stays first because direct.txt overlaps it.
+  - RULE-SET,upstream-proxy,Proxies
+  - RULE-SET,upstream-direct,DIRECT
   # - RULE-SET,china-company-ip,DIRECT
   - MATCH,Proxies

@@ -5,6 +5,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/'
+UPSTREAM = 'https://raw.githubusercontent.com/Loyalsoldier/'
 OPTIONAL = {'ai-shared-extra.list', 'china-company-ip.list'}
 MANAGED_SUBSCRIPTION_RULES = {
     'Apple.list', 'ApplePush.list', 'Bahamut.list', 'Bilibili.list', 'DisneyPlus.list',
@@ -76,6 +77,30 @@ class ClientExamples(unittest.TestCase):
                 self.assertEqual(positions, sorted(positions))
                 self.assertLess(rules.index('DOMAIN,proxy.example.com,DIRECT'), positions[0])
                 self.assertGreater(rules.index(final), positions[-1])
+
+    def test_upstream_fallback_follows_owned_lists_with_proxy_first(self):
+        # direct.txt overlaps proxy.txt, blocked names included, and the first match wins.
+        for example in (ROOT / 'examples').iterdir():
+            with self.subTest(example=example.name):
+                text = example.read_text()
+                if example.suffix == '.conf':
+                    rules = text.split('[Rule]\n', 1)[1]
+                    upstream = UPSTREAM + 'surge-rules/release/'
+                    keys = [BASE + 'proxy.list,Proxies,',
+                            'DOMAIN-SET,' + upstream + 'proxy.txt,Proxies,update-interval=86400\n',
+                            'DOMAIN-SET,' + upstream + 'direct.txt,DIRECT,update-interval=86400\n',
+                            'FINAL,Proxies']
+                else:
+                    rules = text.split('\nrules:\n', 1)[1]
+                    upstream = UPSTREAM + 'clash-rules/release/'
+                    keys = ['RULE-SET,proxy,Proxies', 'RULE-SET,upstream-proxy,Proxies',
+                            'RULE-SET,upstream-direct,DIRECT', 'MATCH,Proxies']
+                    for name in ('proxy', 'direct'):
+                        self.assertIn('    url: ' + upstream + name + '.txt\n', text)
+                    self.assertEqual(text.count('    behavior: domain\n    format: yaml\n    interval: 86400\n'), 2)
+                positions = [rules.index(key) for key in keys]
+                self.assertEqual(positions, sorted(positions))
+                self.assertEqual(text.count(UPSTREAM), 2)
 
     def test_shared_extensions_and_company_ips_require_opt_in(self):
         for example in (ROOT / 'examples').iterdir():
