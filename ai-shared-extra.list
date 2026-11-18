@@ -1,6 +1,6 @@
-# Optional extended AI shared dependencies; imported 2026-10-24.
+# Extended AI shared dependencies; imported 2026-10-24.
 # Routes ALL traffic to these shared hosts, including other sites and developer tools.
-# Disabled in examples; sources and tradeoffs: docs/rule-behavior.md.
+# Examples send it to Proxies, not AI; sources and tradeoffs: docs/rule-behavior.md.
 
 # OpenAI ChatGPT / Codex
 DOMAIN-SUFFIX,ct.sendgrid.net

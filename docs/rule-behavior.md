@@ -31,9 +31,9 @@ IP 项的 `no-resolve` 避免为了匹配内网地址而主动解析每一个公
 
 `ai-shared.list` 单独提供共享主机的分流：`accounts.google.com` 会影响其他 Google 登录，`challenges.cloudflare.com` 会影响其他网站的挑战。TLS 不解密时，不能根据网页来源或加密路径可靠地区分这些请求。可以停用这份规则，但部分 AI 登录或验证请求会随其他规则选择出口。
 
-`ai-shared-extra.list` 是默认关闭的扩展清单，承接新增的共享依赖，不扩大原有 `ai-shared.list` 的默认范围。其中 `api.github.com` 也用于普通 GitHub API，`www.google.com` 与 Google 静态资源也用于搜索和其他 Google 产品；WorkOS、Microsoft/JetBrains 登录、Cognito、Intercom、Stripe、hCaptcha、AWS WAF、公共脚本 CDN 与指定遥测主机也会影响其他服务。启用表示接受这些主机的全部请求走 AI 出口，不能仅按调用页面选择。
+`ai-shared-extra.list` 承接新增的共享依赖，示例将其交给 `Proxies`，排在 `proxy.list` 之后，不扩大 `AI` 出口的范围。其中 `api.github.com` 也用于普通 GitHub API，`www.google.com` 与 Google 静态资源也用于搜索和其他 Google 产品；WorkOS、Microsoft/JetBrains 登录、Cognito、Intercom、Stripe、hCaptcha、AWS WAF、公共脚本 CDN 与指定遥测主机也会影响其他服务。这些主机的全部请求都走普通代理出口，不能仅按调用页面选择。
 
-Copilot 专属服务域名在 `ai.list` 中，通用 GitHub API 只有启用扩展共享清单才会被它捕获。独立 Grok 网站/API 属于 AI；X/Twitter 内嵌 Grok 使用的 `x.com` 仍按普通社交规则处理。如需同一出口，可手动为相关策略组选择相同节点。
+Copilot 专属服务域名在 `ai.list` 中，通用 GitHub API 由扩展共享清单交给 `Proxies`。独立 Grok 网站/API 属于 AI；X/Twitter 内嵌 Grok 使用的 `x.com` 仍按普通社交规则处理。如需同一出口，可手动为相关策略组选择相同节点。
 
 ## 语音与可选云厂商 IP
 

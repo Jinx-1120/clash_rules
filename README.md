@@ -10,7 +10,7 @@
 2. 将示例节点替换为自己的节点；如果合入已有配置，保留节点、监听和 DNS 设置，合并策略组及规则部分，不要重复创建同名配置段或 YAML 键。
 3. 在客户端启用规则模式，选择 `Proxies` 的普通代理出口、`AI` 的海外 AI 出口和 `MainlandAI` 的大陆 AI 出口（默认直连）。已有策略组可替换示例中的同名引用。
 
-下表包含配置示例和托管 Surge 配置使用的规则。扩展共享依赖和云厂商 IP 清单默认注释，按需启用。Surge 的进程规则仅在 Mac 上启用。合并时，将自己的节点入口、本地网络和明确的直连例外放在前面，大陆 AI 放在海外 AI 之前，AI 规则放在普通代理、地区规则及最终兜底之前。
+下表包含配置示例和托管 Surge 配置使用的规则。云厂商 IP 清单默认注释，按需启用。Surge 的进程规则仅在 Mac 上启用。合并时，将自己的节点入口、本地网络和明确的直连例外放在前面，大陆 AI 放在海外 AI 之前，AI 规则放在普通代理、地区规则及最终兜底之前。
 
 ## 包含哪些规则
 
@@ -21,7 +21,7 @@
 | [ai-mainland.list](ai-mainland.list) | DeepSeek、豆包、Kimi、通义等大陆服务及区域端点 | `MainlandAI`，默认 `DIRECT` |
 | [ai.list](ai.list) | ChatGPT / Codex、Claude、Gemini / Antigravity、Cursor、Grok、Copilot、Perplexity 等 AI 服务 | `AI` |
 | [ai-shared.list](ai-shared.list) | AI 使用的共享登录、验证和功能服务 | `AI` |
-| [ai-shared-extra.list](ai-shared-extra.list) | 扩展登录、通用 API、CDN 和遥测依赖，也影响其他服务 | 默认关闭；可选 `AI` |
+| [ai-shared-extra.list](ai-shared-extra.list) | 扩展登录、通用 API、CDN 和遥测依赖，也影响其他服务 | `Proxies` |
 | [ai-voice.list](ai-voice.list) | ChatGPT 语音的官方 IP 网段快照 | `AI` |
 | [ai-process-surge.list](ai-process-surge.list) | AI 桌面应用与专用 CLI 的进程匹配，仅支持 Surge Mac 6+ | `AI` |
 | [proxy.list](proxy.list) | 指定使用代理的网站 | `Proxies` |
@@ -45,7 +45,7 @@ ACL4SSR 的六份快照按各自文件中的 [CC BY-SA 4.0](https://creativecomm
 
 `ai-shared.list` 会同时影响使用相同 Google 登录或 Cloudflare 验证域名的其他网站；不需要时可以移除这份规则的引用。其他客户端和 Surge iOS 使用域名规则，不加载 Mac 进程规则。更细的适用范围见[规则说明](docs/rule-behavior.md)。
 
-扩展共享依赖默认关闭，启用后会把 `api.github.com`、`www.google.com`、部分公共 CDN 等主机的全部流量交给 AI 出口。`ai.list` 已有的整个 `googleapis.com` 覆盖继续保留，也会影响非 AI 的 Google API。
+扩展共享依赖走 `Proxies`，`api.github.com`、`www.google.com`、部分公共 CDN 等主机的全部流量都使用普通代理出口，不占用 AI 出口。`ai.list` 已有的整个 `googleapis.com` 覆盖继续保留，也会影响非 AI 的 Google API。
 
 ## 自动更新
 

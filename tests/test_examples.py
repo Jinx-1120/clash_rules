@@ -6,7 +6,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/'
 UPSTREAM = 'https://raw.githubusercontent.com/Loyalsoldier/'
-OPTIONAL = {'ai-shared-extra.list', 'china-company-ip.list'}
+OPTIONAL = {'china-company-ip.list'}
 MANAGED_SUBSCRIPTION_RULES = {
     'Apple.list', 'ApplePush.list', 'Bahamut.list', 'Bilibili.list', 'DisneyPlus.list',
     'Epic.list', 'Extra_CN.list', 'Extra_CN_2.list', 'Extra_CN_3.list', 'Extra_Crypto.list',
@@ -67,11 +67,11 @@ class ClientExamples(unittest.TestCase):
                 text = example.read_text()
                 if example.suffix == '.conf':
                     rules = text.split('[Rule]\n', 1)[1]
-                    keys = [BASE + name for name in ('LocalAreaNetwork.list', 'no_proxy.list', 'ai-mainland.list', 'ai.list', 'ai-shared.list', 'ai-voice.list', 'proxy.list')]
+                    keys = [BASE + name for name in ('LocalAreaNetwork.list', 'no_proxy.list', 'ai-mainland.list', 'ai.list', 'ai-shared.list', 'ai-voice.list', 'proxy.list', 'ai-shared-extra.list')]
                     final = 'FINAL,Proxies'
                 else:
                     rules = text.split('\nrules:\n', 1)[1]
-                    keys = ['RULE-SET,' + name + ',' for name in ('LocalAreaNetwork', 'no_proxy', 'ai-mainland', 'ai', 'ai-shared', 'ai-voice', 'proxy')]
+                    keys = ['RULE-SET,' + name + ',' for name in ('LocalAreaNetwork', 'no_proxy', 'ai-mainland', 'ai', 'ai-shared', 'ai-voice', 'proxy', 'ai-shared-extra')]
                     final = 'MATCH,Proxies'
                 positions = [rules.index(key) for key in keys]
                 self.assertEqual(positions, sorted(positions))
@@ -102,7 +102,7 @@ class ClientExamples(unittest.TestCase):
                 self.assertEqual(positions, sorted(positions))
                 self.assertEqual(text.count(UPSTREAM), 2)
 
-    def test_shared_extensions_and_company_ips_require_opt_in(self):
+    def test_company_ips_require_opt_in(self):
         for example in (ROOT / 'examples').iterdir():
             with self.subTest(example=example.name):
                 active = '\n'.join(line for line in example.read_text().splitlines()

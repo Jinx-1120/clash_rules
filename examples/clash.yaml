@@ -63,13 +63,6 @@ rule-providers:
     path: ./rule-providers/ai-voice.list
     interval: 3600
   # Optional providers: uncomment together with their matching rules below.
-#   ai-shared-extra:
-#     type: http
-#     behavior: classical
-#     format: text
-#     url: https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/ai-shared-extra.list
-#     path: ./rule-providers/ai-shared-extra.list
-#     interval: 3600
 #   china-company-ip:
 #     type: http
 #     behavior: classical
@@ -83,6 +76,13 @@ rule-providers:
     format: text
     url: https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/proxy.list
     path: ./rule-providers/proxy.list
+    interval: 3600
+  ai-shared-extra:
+    type: http
+    behavior: classical
+    format: text
+    url: https://raw.githubusercontent.com/Jinx-1120/clash_rules/main/ai-shared-extra.list
+    path: ./rule-providers/ai-shared-extra.list
     interval: 3600
   upstream-proxy:
     type: http
@@ -106,9 +106,9 @@ rules:
   - RULE-SET,ai-mainland,MainlandAI
   - RULE-SET,ai,AI
   - RULE-SET,ai-shared,AI
-  # - RULE-SET,ai-shared-extra,AI
   - RULE-SET,ai-voice,AI
   - RULE-SET,proxy,Proxies
+  - RULE-SET,ai-shared-extra,Proxies
   # Upstream fallback for names no owned list claims; proxy.txt stays first because direct.txt overlaps it.
   - RULE-SET,upstream-proxy,Proxies
   - RULE-SET,upstream-direct,DIRECT

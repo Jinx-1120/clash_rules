@@ -81,7 +81,7 @@ class AIRules(unittest.TestCase):
         for host in ('notgoogleapis.com', 'googleapis.com.evil.example'):
             self.assertFalse(domain_matches(host, entries), host)
 
-    def test_extended_shared_hosts_are_opt_in(self):
+    def test_extended_shared_hosts_stay_out_of_ai_lists(self):
         core = rules('ai.list') + rules('ai-shared.list')
         extra = rules('ai-shared-extra.list')
         for host in ('api.github.com', 'www.google.com', 'fonts.gstatic.com', 'cdn.jsdelivr.net',
