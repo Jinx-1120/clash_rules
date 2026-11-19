@@ -90,3 +90,5 @@ Surge 的 `FINAL,Proxies,dns-failed` 保证启用可选 IP 兜底后，本地 DN
 2026-10-24 的新增域名来自本地在用规则快照；服务域名合入 `ai.list`，通用登录、CDN 等共享依赖拆入 `ai-shared-extra.list`，不重复收录旧版快照。上述官方资料用于核对特定产品和区域端点，不表示每条本地补充域名均为官方必需项，也不表示已经逐产品完成连通性验收。
 
 官方网络说明和客户端观测可作为补充规则的依据；安装包中出现的端点字符串只代表候选依赖，不能单独证明实际请求或必要性。
+
+2026-11-19 对照 [Net.Coffee 的 Claude 域名清单](https://ip.net.coffee/claude/site.html)，补入 `claudemcpclient.com` 后缀及四个 Claude 专用的外部 CDN、认证和内容主机，外部主机均精确匹配。已有的 `cdn.anthropic.com` 与 `maps.googleapis.com` 分别由 `anthropic.com` 和 `googleapis.com` 后缀覆盖。Datadog 接收端和 Intercom 属于共享依赖，继续由 `ai-shared-extra.list` 分流。Claude API 的入站网段以[官方 IP 文档](https://platform.claude.com/docs/en/api/ip-addresses)为准，域名清单仅用于域名匹配。

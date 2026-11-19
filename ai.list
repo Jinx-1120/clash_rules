@@ -1,6 +1,6 @@
 # AI service destinations. Surge RULE-SET / Mihomo classical text.
 # No policy column, IP ranges or ASN catch-all; googleapis.com is intentionally broad.
-# Sources and shared-host tradeoffs: docs/rule-behavior.md. Updated 2026-10-24.
+# Sources and shared-host tradeoffs: docs/rule-behavior.md. Updated 2026-11-19.
 
 # OpenAI / ChatGPT / Codex
 DOMAIN-SUFFIX,openai.com
@@ -24,7 +24,12 @@ DOMAIN-SUFFIX,claude.ai
 DOMAIN-SUFFIX,claude.com
 DOMAIN-SUFFIX,claude.app
 DOMAIN-SUFFIX,claudeusercontent.com
+DOMAIN-SUFFIX,claudemcpclient.com
 DOMAIN-SUFFIX,claudemcpcontent.com
+DOMAIN,anthropic.com.cdn.cloudflare.net
+DOMAIN,servd-anthropic-website.b-cdn.net
+DOMAIN,anthropic.auth0.com
+DOMAIN,anthropic-com.ghost.io
 
 # Cursor (API, login, updates, marketplace and nested hosted computers)
 DOMAIN-SUFFIX,cursor.com

@@ -48,6 +48,8 @@ class AIRules(unittest.TestCase):
         hosts = '''chatgpt.com ws.chatgpt.com auth.openai.com api.openai.com cdn.oaistatic.com
         files.oaiusercontent.com api.anthropic.com platform.claude.com claude.app
         bridge.claudeusercontent.com nested.frame.claudeusercontent.com widget.claudemcpcontent.com
+        claudemcpclient.com app.claudemcpclient.com anthropic.com.cdn.cloudflare.net
+        servd-anthropic-website.b-cdn.net anthropic.auth0.com anthropic-com.ghost.io
         cloudcode-pa.googleapis.com daily-cloudcode-pa.googleapis.com
         daily-cloudcode-pa.sandbox.googleapis.com antigravity.google.com antigravity-unleash.goog
         api2.cursor.sh api5.cursor.sh marketplace.cursorapi.com downloads.cursor.com
@@ -87,7 +89,8 @@ class AIRules(unittest.TestCase):
         for host in ('api.github.com', 'www.google.com', 'fonts.gstatic.com', 'cdn.jsdelivr.net',
                      'accounts.spacex.ai', 'login.microsoftonline.com', 'account.jetbrains.com',
                      'cognito-identity.us-east-1.amazonaws.com', 'cdn.workos.com', 'js.stripe.com',
-                     'intercom.io', 'js.hcaptcha.com', 'challenge.awswaf.com'):
+                     'intercom.io', 'intercomcdn.com', 'browser-intake-us5-datadoghq.com',
+                     'js.hcaptcha.com', 'challenge.awswaf.com'):
             self.assertFalse(domain_matches(host, core), host)
             self.assertTrue(domain_matches(host, extra), host)
         for host in ('github.com', 'mail.google.com', 'unrelated.cloudfront.net',
@@ -116,7 +119,8 @@ class AIRules(unittest.TestCase):
         for host in ('google.com','mail.google.com',
                      'github.com','api.github.com','github.githubassets.com','avatars.githubusercontent.com',
                      'raw.githubusercontent.com','registry.npmjs.org','example.sentry.io',
-                     'example.auth0.com','x.com','twitter.com','cloudflare.com','cdn.jsdelivr.net',
+                     'example.auth0.com','other.ghost.io','other.b-cdn.net','other.cdn.cloudflare.net',
+                     'claudemcpclient.com.evil.example','x.com','twitter.com','cloudflare.com','cdn.jsdelivr.net',
                      'notopenai.com','openai.com.evil.example','claude.ai.evil.example','127.0.0.1'):
             self.assertFalse(domain_matches(host, entries), host)
         self.assertTrue(all(kind not in ('IP-ASN','IP-CIDR','DOMAIN-KEYWORD') for kind,_ in entries))
